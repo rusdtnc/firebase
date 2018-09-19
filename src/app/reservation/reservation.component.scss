@@ -1,0 +1,47 @@
+select option:disabled {
+  color: red;
+}
+
+mwl-calendar-week-view {
+  .cal-event-container {
+    height: 40px !important;
+  }
+}
+
+.cal-week-view .cal-header.cal-today, .cal-month-view .cal-day-cell.cal-today {
+  background-color: #e5edeb;
+}
+
+.cal-day-column {
+  .cal-disabled-seg {
+    background-color: #eee;
+    pointer-events: none;
+  }
+}
+
+.cal-disabled {
+  background-color: #eee;
+  pointer-events: none;
+
+  & .cal-day-number {
+    opacity: 0.1;
+  }
+}
+
+.cal-day-view .cal-hour-rows {
+  overflow-y: hidden;
+}
+
+.cal-hour-segment.cal-hour-start:hover {
+  background-color: #f9eee8 !important;
+  cursor: pointer;
+}
+
+mwl-calendar-month-cell:hover, .cal-header:hover {
+  background-color: #f9eee8 !important;
+  cursor: pointer;
+}
+
+.datepicker table tr td.active {
+  background-color: #00503c !important;
+}

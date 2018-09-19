@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary sticky-top">
+  <a class="navbar-brand" [routerLink]="['/']">TCG</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item d-inline position-relative mr-2">
+        <a class="nav-link" [routerLink]="['/joueurs']" routerLinkActive="active">Profil <span *ngIf="nbReservations" class="badge badge-light rounded-circle">{{nbReservations}}</span></a>
+      </li>
+      <li class="nav-item button-notif">
+        <a class="nav-link" [routerLink]="['/reservations']"  routerLinkActive="active">Réservations</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a class="nav-link" href="" (click)="authService.logout()">Se déconnecter</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid app-container">
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+</div>

@@ -1,0 +1,28 @@
+
+a {
+  color: #FFFFFF !important;
+}
+
+a.active {
+  color:  #c85a19 !important;
+}
+
+
+
+
+
+.container {
+  background: #FFFFFF;
+  padding-top: 15px;
+  min-height: 100vh;
+}
+
+
+.badge{
+  position: absolute;
+  @media (min-width: 768px) {
+    right: -10px;
+  }
+
+  top:0px;
+}

@@ -1,0 +1,70 @@
+<div class="col-lg-10 offset-lg-1">
+<div class="card border-primary mb-4">
+  <div class="card-header">
+    <h5>Mon Profil TCG</h5>
+  </div>
+
+  <div class="card-body">
+    <form class="justify-content-center" [formGroup]="_joueurForm">
+      <div class="form-group row">
+        <div class="col-lg-2">
+      <img src="https://firebasestorage.googleapis.com/v0/b/mon-espace-tcg.appspot.com/o/site%2Fmen.png?alt=media&token=672e3a44-35ba-4616-974c-bd1c1decd50a" class="border border-primary rounded-circle" style="width: 100px; height: 100px">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="nom" class="col-lg-2 col-form-label">Nom*</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" id="nom" formControlName="nom">
+          <app-error-message [formGroup]="_joueurForm" [fieldName]="'nom'"
+                             [errorName]="'required'">Le nom est obligatoire
+          </app-error-message>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="prenom" class="col-lg-2 col-form-label">Prénom*</label>
+        <div class="col-lg-6">
+          <input type="text" class="form-control" id="prenom" formControlName="prenom">
+          <app-error-message [formGroup]="_joueurForm" [fieldName]="'prenom'"
+                             [errorName]="'required'">Le prénom est obligatoire
+          </app-error-message>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-2 col-form-label" for="inlineFormCustomSelectPref">Classement</label>
+        <div class="col-lg-2">
+          <select class="form-control" id="inlineFormCustomSelectPref">
+            <option selected></option>
+            <option [selected]="isSelected('15/4')" value="15/4">15/4</option>
+            <option [selected]="isSelected('15/3')" value="15/3">15/3</option>
+            <option [selected]="isSelected('15/2')" value="15/2">15/2</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="licence" class="col-lg-2 col-form-label">N° Licence</label>
+        <div class="col-lg-4">
+          <input type="text" class="form-control" id="licence" formControlName="licence">
+        </div>
+      </div>
+      <div class="text-right">
+      <button (click)="update()" class="btn btn-primary" [disabled]="disabled()">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+  <div class="card border-primary">
+    <div class="card-header">
+      <h5>Mes réservations en cours <span *ngIf="nbReservations" class="badge badge-secondary">{{nbReservations}}</span></h5>
+    </div>
+
+    <div>
+
+      <ul class="list-group">
+        <li class="list-group-item"*ngFor="let reservation of reservationsJoueur">{{formatReservation(reservation)}}      <button (click)="deleteReservation(reservation)" type="button" class="close" aria-label="Supprimer">
+          <span aria-hidden="true"><i class="far fa-trash-alt"></i></span>
+        </button></li>
+      </ul>
+    </div>
+  </div>
+</div>

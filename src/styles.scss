@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+$primary: #00503c;
+$secondary: #c85a19;
+
+$input-btn-focus-color:       rgba($secondary, .05);
+
+@import '~bootstrap/scss/bootstrap';
+
+input:not([type=file]).ng-touched.invalid, input:not([type=file]).ng-touched.ng-invalid, select.ng-touched.invalid, select.ng-touched.ng-invalid {
+  border-left: 5px solid $danger;
+}
+
+
+
+body {
+  background: transparent;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+

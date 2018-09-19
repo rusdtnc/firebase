@@ -1,0 +1,116 @@
+@import "../../assets/color.scss";
+
+@mixin border($color) {
+  border: solid 1px $color;
+}
+
+.vide {
+  width: 100%;
+  height: 49px;
+  cursor: pointer;
+}
+
+.vide:hover {
+  background-color: #f9eee8 !important;
+}
+
+div.reservation {
+  max-width: 100%;
+  height: 47px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 1px;
+  padding: 0 5px;
+  border-radius: 5px;
+  border: solid 1px;
+  color: #1e90ff;
+  background-color: #e5edeb;
+  cursor: pointer;
+
+  &.court1 {
+    border-color: $court1;
+  }
+  &.court2 {
+    border-color: $court2;
+  }
+  &.court3 {
+    border-color: $court3;
+  }
+  &.court4 {
+    border-color: $court4;
+  }
+  &.court5 {
+    border-color: $court5;
+  }
+  &.court6 {
+    border-color: $court6;
+  }
+  &.court7 {
+    border-color: $court7;
+  }
+  &.court8 {
+    border-color: $court8;
+  }
+}
+
+span.reservation {
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0;
+  width: 12%;
+  overflow: hidden;
+}
+
+.cal-disabled {
+  background-color: #eee;
+  pointer-events: none;
+}
+
+
+th.cal-time {
+  padding: 0;
+  padding-top: 5px;
+  text-align: center;
+}
+
+th.header-court {
+  padding: 0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-bordered th, .table-bordered td {
+    border-bottom: thin dashed #e1e1e1;
+    border-top: none;
+}
+
+thead {
+  border-bottom: thin solid #e1e1e1;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #fafafa;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+a:hover {
+  color: #000403 !important;
+  text-decoration: underline;
+}
+
+a {
+  color: #00503c !important;
+}
+
+.tooltip{
+  font-size: 11px;
+}

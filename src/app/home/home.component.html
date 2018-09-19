@@ -1,0 +1,24 @@
+<table class="table table-bordered table-striped" style="table-layout: fixed;">
+  <thead>
+  <tr>
+    <th scope="col"></th>
+    <th scope="col" >Court 1</th>
+    <th scope="col" >Court 2</th>
+    <th scope="col" >Court 3</th>
+    <th scope="col" >Court 4</th>
+    <th scope="col" >Court 5</th>
+    <th scope="col" >Court 6</th>
+    <th scope="col" >Court 7</th>
+    <th scope="col" >Court 8</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let heure of [8,9,10,11,12,13,14,15,16,17,18,19,20]">
+    <th scope="row">{{heure}}h</th>
+    <td *ngFor="let court of ['1','2','3','4','5','6','7','8']">
+      <div *ngIf="isCourtReserve(court,heure)" class="reservation"><span class="reservation"><i class="fa fa-fw fa-times"></i>{{isCourtReserve(court,heure)}}</span></div>
+      <div *ngIf="!isCourtReserve(court,heure)" (click)="displayInfo(court,heure)" class="vide"></div>
+    </td>
+  </tr>
+  </tbody>
+</table>
