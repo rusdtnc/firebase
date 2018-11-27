@@ -2,12 +2,16 @@ import { Injectable, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable, of } from 'rxjs/index';
 import { distinctUntilChanged, map } from 'rxjs/internal/operators';
-import { JoueurInfos } from './joueur';
+import { JoueurInfos, LignePalmares } from './joueur';
 import { Model, ModelFactory } from 'ngx-model';
 import { SnackbarService } from '../shared/snackbar/snackbar.service';
+import { HttpClient } from '@angular/common/http';
+import { JoueurBouchonService } from './joueur.bouchoon.service';
+import { Multi, Single } from '../utils/graph';
+import * as moment from 'moment';
 
 export interface Joueur {
-  value: JoueurInfos,
+  value: any,
   key: any
 }
 
@@ -31,7 +35,9 @@ export class JoueurService {
 
   constructor(private db: AngularFireDatabase,
               private modelFactory: ModelFactory<Joueur>,
-              private _snackbarService: SnackbarService
+              private _snackbarService: SnackbarService,
+              private httpClient: HttpClient,
+              private jourBouchonService : JoueurBouchonService
   ) {
     this.joueurConnecte = this.modelFactory.create(initialState);
     this.joueurConnecte$ = this.joueurConnecte.data$;
@@ -47,10 +53,20 @@ export class JoueurService {
         map(
           changes => {
             const joueurConnecte = this.joueurConnecte.get();
-            joueurConnecte.value = changes[0].payload.val() as JoueurInfos;
+            const infos = changes[0].payload.val() as JoueurInfos;
             joueurConnecte.key = changes[0].payload.key;
-            this.joueurConnecte.set(joueurConnecte);
+
             localStorage.setItem('application:user',joueurConnecte.key);
+
+            this.jourBouchonService.getInfosJoueur().subscribe(
+              val => {
+                console.log(val);
+                joueurConnecte.value = val;
+                joueurConnecte.value.victoiresDefaites = [new Single('Victoires',val.nbVictoires), new Single('Défaites',val.nbDefaites)];
+                joueurConnecte.value.stats = val.stats.sort((stat1, stat2) => stat2.echelon - stat1.echelon).map(stat => new Multi(stat.libelle, [new Single('Victoires',stat.victoires), new Single('Défaites',stat.defaites)]))
+                joueurConnecte.value.palmares = val.lignes.map(l => new LignePalmares(l.victoire?'V':'D',`${l.nomAdversaire} ${l.prenomAdversaire}`, l.classement, moment(l.date).format('DD/MM/YYYY'), l.libelle, l.score));
+                this.joueurConnecte.set(joueurConnecte);
+              });
           })).subscribe();
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ReservationService } from '../reservation/reservation.service';
 import { AngularFireStorage } from 'angularfire2/storage';
+declare var $: any;
 
 @Component({
   selector: 'app-menu',
@@ -16,5 +17,10 @@ export class MenuComponent implements OnInit {l
 
   ngOnInit() {
     this._reservationService.nbReservationsJoueur$.subscribe(val => this.nbReservations = val);
+
+    $('body').tooltip({
+      selector: '.mytool',
+      trigger : 'hover'
+    })
   }
 }

@@ -67,10 +67,6 @@ export class DayComponent implements OnChanges, OnInit {
 
   }
 
-  onShow() {
-    console.log('show');
-  }
-
   deleteReservation(court, heure) {
     this.deleteClicked.emit({key: (this.reservationGrille[court - 1][heure-8]).key});
   }

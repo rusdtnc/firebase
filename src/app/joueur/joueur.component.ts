@@ -5,6 +5,8 @@ import { map } from 'rxjs/internal/operators';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../reservation/reservation';
 import * as moment from 'moment';
+import { multi, single } from './joueur.data';
+import { Single } from '../utils/graph';
 declare var $: any;
 
 moment.locale('fr');
@@ -16,12 +18,52 @@ moment.locale('fr');
 })
 export class JoueurComponent implements OnInit {
 
+  single = single;
+  multi = multi;
+
+  victoiresDefaites: Single[] = [];
+
+  viewVd =[300,150];
+  view =[700,300];
+
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  legendTitle = 'Legend';
+  legendPosition = 'right';
+  showXAxisLabel = false;
+  tooltipDisabled = false;
+  xAxisLabel = 'Country';
+  showYAxisLabel = false;
+  yAxisLabel = 'GDP Per Capita';
+  showGridLines = false;
+  innerPadding = '10%';
+  barPadding = 8;
+  groupPadding = 16;
+  roundDomains = false;
+  maxRadius = 10;
+  minRadius = 3;
+  showSeriesOnHover = true;
+  roundEdges: boolean = true;
+  animations: boolean = true;
+  xScaleMin: any;
+  xScaleMax: any;
+  yScaleMin: number;
+  yScaleMax: number;
+  showDataLabel = false;
+
   _joueurForm: FormGroup;
 
-  classement: string;
+  _joueur: any;
+
   nbReservations: number;
   reservationsJoueur= [];
   success: boolean;
+
+  scheme = {
+    domain: ['#327262', '#d37a46']
+  }
 
 
   constructor( private _fb: FormBuilder,
@@ -46,11 +88,19 @@ export class JoueurComponent implements OnInit {
   ngOnInit() {
     this._joueurService.value$.subscribe(
       val => {
+        this._joueur = val;
         this._joueurForm.patchValue(val, {emitEvent: false});
-        this.classement = val.classement;
       }
     )
 
+
+  }
+
+  formatX = (val) => {
+    if(Number(val) === val && val % 1 === 0) {
+      return val;
+    }
+    return '';
   }
 
   createForm() {
@@ -60,14 +110,6 @@ export class JoueurComponent implements OnInit {
       'classement': [''],
       'licence': ['']
     });
-  }
-
-  isSelected(classement:string): boolean {
-    return this.classement === classement;
-  }
-
-  update() {
-    this._joueurService.updateJoueur(this._joueurForm.getRawValue()).then(() => this._joueurForm.markAsPristine());
   }
 
   formatReservation(reservation: Reservation): string {

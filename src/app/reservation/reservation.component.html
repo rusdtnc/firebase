@@ -8,14 +8,8 @@
   <div class="col-md-4 offset-4" [hidden]="view === 'day'">
           <select id="mySelect" data-show-content="true" class="form-control" data-style="btn-outline-primary" (change)="filterByCourt($event.target.value)">
             <option value="" data-content='<i class="far fa-eye"></i> Tous les courts</i>'></option>
-            <option value="1" data-content='<i class="fas fa-circle" style="color: #cba488"> Court 1</i>'></option>
-            <option value="2" data-content=' <i class="fas fa-circle" style="color: #7a9379"> Court 2</i>'></option>
-            <option value="3" data-content='<i class="fas fa-circle" style="color: #FF847C"> Court 3</i>'></option>
-            <option value="4" data-content='<i class="fas fa-circle" style="color: #F7DB4F"> Court 4</i>'></option>
-            <option value="5" data-content='<i class="fas fa-circle" style="color: #2F9599"> Court 5</i>'></option>
-            <option value="6" data-content='<i class="fas fa-circle" style="color: #355C7D"> Court 6</i>'></option>
-            <option value="7" data-content='<i class="fas fa-circle" style="color: #6C5B7B"> Court 7</i>'></option>
-            <option value="8" data-content='<i class="fas fa-circle" style="color: #2A363B"> Court 8</i>'></option>
+            <option value="1" data-content='<i class="fas fa-circle" style="color: #00503c"> Court 1</i>'></option>
+            <option value="2" data-content=' <i class="fas fa-circle" style="color: #c85a19"> Court 2</i>'></option>
           </select>
     </div>
 </div>
@@ -63,7 +57,6 @@
       [viewDate]="viewDate"
       (hourSegmentClicked)="hourSegmentClicked($event)"
       (deleteClicked)="deleteClicked($event)">
-
     </app-day>
     <mwl-calendar-day-view
       class="d-md-none d-block"
@@ -75,7 +68,8 @@
       [dayEndHour]="20"
       [hourSegments]="1"
       [hourSegmentHeight]="50"
-      (hourSegmentClicked)="hourSegmentClicked($event)">
+      (hourSegmentClicked)="hourSegmentClicked($event)"
+      (beforeViewRender)="beforeDayViewRender($event)">
     </mwl-calendar-day-view>
   </div>
 </div>
@@ -107,18 +101,6 @@
                 *ngIf="isReserved('1')">réservé</span></option>
               <option value="2" [selected]="isSelected('2')" [disabled]="isReserved('2')">Court n°2 <span
                 *ngIf="isReserved('2')">réservé</span></option>
-              <option value="3" [selected]="isSelected('3')" [disabled]="isReserved('3')">Court n°3 <span
-                *ngIf="isReserved('3')">réservé</span></option>
-              <option value="4" [selected]="isSelected('4')" [disabled]="isReserved('4')">Court n°4 <span
-                *ngIf="isReserved('4')">réservé</span></option>
-              <option value="5" [selected]="isSelected('5')" [disabled]="isReserved('5')">Court n°5 <span
-                *ngIf="isReserved('5')">réservé</span></option>
-              <option value="6" [selected]="isSelected('6')" [disabled]="isReserved('6')">Court n°6 <span
-                *ngIf="isReserved('6')">réservé</span></option>
-              <option value="7" [selected]="isSelected('7')" [disabled]="isReserved('7')">Court n°7 <span
-                *ngIf="isReserved('7')">réservé</span></option>
-              <option value="8" [selected]="isSelected('8')" [disabled]="isReserved('8')">Court n°8 <span
-                *ngIf="isReserved('8')">réservé</span></option>
             </select>
           </div>
         </form>

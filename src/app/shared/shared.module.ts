@@ -6,6 +6,7 @@ import { MODEL_PROVIDER } from 'ngx-model';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SnackbarService } from './snackbar/snackbar.service';
 import { ErrorMessageComponent } from './error-messagae/error-message.component';
+import { HttpClientModule } from '@angular/common/http';
 const ANGULAR_MODULES: any[] = [
   FormsModule, ReactiveFormsModule
 ];
@@ -14,6 +15,7 @@ const ANGULAR_MODULES: any[] = [
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
     ANGULAR_MODULES
   ],
   declarations: [

@@ -4,21 +4,14 @@
     <th scope="col" style="width: 70px; height: 60px"></th>
     <th scope="col" class="header-court">Court n°1</th>
     <th scope="col" class="header-court">Court n°2</th>
-    <th scope="col" class="header-court">Court n°3</th>
-    <th scope="col" class="header-court">Court n°4</th>
-    <th scope="col" class="header-court">Court n°5</th>
-    <th scope="col" class="header-court">Court n°6</th>
-    <th scope="col" class="header-court">Court n°7</th>
-    <th scope="col" class="header-court">Court n°8</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let heure of ['08','09',10,11,12,13,14,15,16,17,18,19,20]">
     <th scope="row" class="cal-time">{{heure}} h</th>
-    <td *ngFor="let court of ['1','2','3','4','5','6','7','8']">
+    <td *ngFor="let court of ['1','2']">
       <div [hidden]="getReservation(court,heure) === null" class="reservation" data-toggle="tooltip" data-placement="top" title="{{getTitle(court,heure)}}"
-           [ngClass]="{'court1': court === '1', 'court2': court === '2','court3': court === '3', 'court4': court === '4',
-           'court5': court === '5', 'court6': court === '6','court7': court === '7', 'court8': court === '8'}"
+           [ngClass]="{'court1': court === '1', 'court2': court === '2'}"
       ><span class="reservation"><a (click)="deleteReservation(court,heure)"><i class="fa fa-fw fa-times"></i></a>{{getTitle(court,heure)}}</span></div>
       <div *ngIf="!getReservation(court,heure)" (click)="addReservation(court,heure)" class="vide" [ngClass]="{'cal-disabled': isDisabled(heure)}"></div>
     </td>

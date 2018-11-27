@@ -6,15 +6,21 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item d-inline position-relative mr-2">
-        <a class="nav-link" [routerLink]="['/joueurs']" routerLinkActive="active">Profil <span *ngIf="nbReservations" class="badge badge-light rounded-circle">{{nbReservations}}</span></a>
-      </li>
-      <li class="nav-item button-notif">
+      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/reservations']"  routerLinkActive="active">Réservations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/licencies']"  routerLinkActive="active">Licenciés</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/competitions']"  routerLinkActive="active">Compétitions</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a class="nav-link" href="" (click)="authService.logout()">Se déconnecter</a></li>
+      <li class="nav-item d-inline position-relative mr-2">
+        <a data-toggle="tooltip" data-placement="bottom" title="Mon profil" class="nav-link mytool" [routerLink]="['/joueurs']" routerLinkActive="active"><i class="far fa-user"></i> <span *ngIf="nbReservations" class="badge badge-light rounded-circle">{{nbReservations}}</span></a>
+      </li>
+      <li><a data-toggle="tooltip" data-placement="bottom" title="Se déconnecter" class="nav-link mytool" href="" (click)="authService.logout()"><i class="fas fa-sign-out-alt"></i></a></li>
     </ul>
   </div>
 </nav>

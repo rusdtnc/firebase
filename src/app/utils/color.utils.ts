@@ -2,12 +2,12 @@ export class ColorUtils {
 
   public static readonly colors = {
     un: {
-      primary: '#cba488',
+      primary: '#00503c',
       secondary: '#e5edeb'
     },
     deux: {
-      primary: '#7a9379',
-      secondary: '#e5edeb'
+      primary: '#c85a19',
+      secondary: '#f9eee8'
     },
     trois: {
       primary: '#FF847C',

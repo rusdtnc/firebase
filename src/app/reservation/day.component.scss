@@ -3,6 +3,9 @@
 @mixin border($color) {
   border: solid 1px $color;
 }
+:host {
+
+}
 
 .vide {
   width: 100%;
@@ -33,6 +36,7 @@ div.reservation {
   }
   &.court2 {
     border-color: $court2;
+    background-color: #f9eee8;
   }
   &.court3 {
     border-color: $court3;
@@ -81,7 +85,7 @@ th.cal-time {
 
 th.header-court {
   padding: 0;
-  vertical-align: middle;
+  vertical-align: middle !important;
   text-align: center;
 }
 

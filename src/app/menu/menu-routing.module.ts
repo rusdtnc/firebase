@@ -17,6 +17,10 @@ const routes: Routes = [
       {
         path: 'joueurs',
         loadChildren: 'app/joueur/joueur.module#JoueurModule'
+      },
+      {
+        path: 'competitions',
+        loadChildren: 'app/competitions/competition.module#CompetitionModule'
       }
     ]
   }

@@ -8,6 +8,7 @@ import { JoueurService } from '../joueur/joueur.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Reservation } from './reservation';
 import { AuthService } from '../auth.service';
+import { SnackbarService } from '../shared/snackbar/snackbar.service';
 declare var $: any;
 
 // weekStartsOn option is ignored when using moment, as it needs to be configured globally for the moment locale
@@ -31,14 +32,15 @@ export class ReservationComponent implements OnInit {
   uidJoueurConnecte: any;
   view: string = 'week';
   viewDate: Date = new Date();
-  reservedCourt: string[] = [];
+  reservedCourt: any[] = [];
   events$: Observable<Array<CalendarEvent<any>>>;
   selectedDayViewDate: Date;
 
   constructor(public reservationService: ReservationService,
               private _joueurService: JoueurService,
               private _fb: FormBuilder,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private _snackbarService: SnackbarService) {
     this.createForm();
     this._joueurService.key$.subscribe(val => this.uidJoueurConnecte = val);
     this._joueurService.value$.subscribe(val => this.reservationForm.get('joueur').setValue(`${val.nom} ${val.prenom}`));
@@ -83,7 +85,6 @@ export class ReservationComponent implements OnInit {
    * @param date
    */
   hourSegmentClicked(event: any): void {
-    console.log(event);
     if (moment().isBefore(event.date)) {
 
       this.selectedDayViewDate = event.date;
@@ -93,18 +94,24 @@ export class ReservationComponent implements OnInit {
         map(reservation => {
           return reservation
             .filter(event => (moment(event.debut, 'YYYY/MM/DD HH:mm').isSame(this.selectedDayViewDate, 'hours')))
-            .map(data => data.court);
+            .map(data => {
+              return {court: data.court, joueur: data.uidJoueur}
+            });
         })
       ).subscribe(val => {
         this.reservedCourt = val;
       });
 
-      if (event.court) {
-        this.reservationForm.get('court').setValue(event.court);
 
+      if(this.reservedCourt.map(reservation => reservation.joueur).includes(this.uidJoueurConnecte)) {
+        this._snackbarService.addMessageWarning('Vous avez déjà une réservation pour ce créneau')
+      } else {
+        if (event.court) {
+          this.reservationForm.get('court').setValue(event.court);
+        }
+
+        $('#exampleModalCenter').modal('toggle');
       }
-
-      $('#exampleModalCenter').modal('toggle');
     }
   }
 
@@ -167,7 +174,7 @@ export class ReservationComponent implements OnInit {
    */
   isReserved(court: string): boolean {
     if (!this.processInfos()) {
-      return (this.reservedCourt.includes(court));
+      return (this.reservedCourt.map(reservation => reservation.court).includes(court));
     }
     return false;
   }

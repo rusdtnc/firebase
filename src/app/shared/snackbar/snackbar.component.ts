@@ -33,5 +33,15 @@ export class SnackbarComponent implements OnInit {
         this.snackbar.nativeElement.className = this.snackbar.nativeElement.className.replace("show alert alert-danger", "");
       }
     });
+
+    this._snackbarService.warningMessage$.subscribe(val => {
+      this.message = val;
+      this.cr.detectChanges();
+      if(val) {
+        this.snackbar.nativeElement.className = "show alert alert-warning";
+      } else {
+        this.snackbar.nativeElement.className = this.snackbar.nativeElement.className.replace("show alert alert-warning", "");
+      }
+    });
   }
 }

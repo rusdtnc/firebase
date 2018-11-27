@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/index';
 import { distinctUntilChanged, map } from 'rxjs/internal/operators';
 export interface SnackbarMessages {
   success: string,
-  error: string
+  error: string,
+  warning: string
 }
 
 const initialState: SnackbarMessages = {
   success: null,
-  error: null
+  error: null,
+  warning: null
 }
 
 
@@ -24,6 +26,7 @@ export class SnackbarService {
   messages$: Observable<SnackbarMessages>;
   successMessage$: Observable<string>;
   errorMessage$: Observable<string>;
+  warningMessage$: Observable<string>;
 
   constructor(private modelFactory: ModelFactory<SnackbarMessages>) {
     this.messages = this.modelFactory.create(initialState);
@@ -31,6 +34,7 @@ export class SnackbarService {
 
     this.successMessage$ = this.messages$.pipe(map(messages => messages.success), distinctUntilChanged());
     this.errorMessage$ = this.messages$.pipe(map(messages => messages.error), distinctUntilChanged());
+    this.warningMessage$ = this.messages$.pipe(map(messages => messages.warning), distinctUntilChanged());
   }
 
 
@@ -50,11 +54,20 @@ export class SnackbarService {
     this.resetMessages();
   }
 
+  addMessageWarning(message: string): void {
+    const messages = this.messages.get();
+    messages.warning = message;
+    this.messages.set(messages);
+
+    this.resetMessages();
+  }
+
   private resetMessages(): void {
     setTimeout(() => {
       const messages = this.messages.get();
       messages.success = null;
       messages.error = null;
+      messages.warning = null;
       this.messages.set(messages);
     }, 3000);
   }
