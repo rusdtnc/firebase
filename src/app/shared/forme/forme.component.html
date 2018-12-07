@@ -1,0 +1,6 @@
+<ng-container *ngFor="let forme of resultats">
+  <i class="far fa-frown defaite" *ngIf="forme === 'D'"></i>
+  <i class="far fa-grin-beam-sweat nul" *ngIf="forme === 'N'"></i>
+  <i class="fas fa-trophy victoire" *ngIf="forme === 'V'"></i>
+  &nbsp;
+</ng-container>

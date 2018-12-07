@@ -4,7 +4,8 @@ import { JoueurComponent } from './joueur.component';
 const routes: Routes = [
   {
     path: '',
-    component: JoueurComponent
+    component: JoueurComponent,
+    data: {animation: 'joueur'}
   }
 ];
 

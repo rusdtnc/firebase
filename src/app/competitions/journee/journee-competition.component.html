@@ -1,0 +1,15 @@
+<div class="col-md-8 offset-md-2">
+  <div class="card mb-3">
+    <div class="card-header pb-0 pt-0">
+      <div class="row justify-content-between p-2">
+        <h6 class="text-primary">Journée {{journee.numero}}</h6>
+        <span>{{getDateJournee(journee)}}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <ng-container *ngFor="let rencontre of journee.rencontres">
+        <app-competition-score [rencontre]="rencontre"></app-competition-score>
+      </ng-container>
+    </div>
+  </div>
+</div>

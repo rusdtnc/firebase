@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CompetitionService } from './competition.service';
+declare var $: any;
+
 @Component({
   selector: 'app-competition',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,11 +11,7 @@ import { CompetitionService } from './competition.service';
 })
 export class CompetitionComponent implements OnInit {
 
-  result;
+  constructor(public _competitionService: CompetitionService) {}
 
-  constructor(private competitionService: CompetitionService) {}
-
-  ngOnInit() {
-    this.competitionService.getCompetitions();
-  }
+  ngOnInit() { }
 }

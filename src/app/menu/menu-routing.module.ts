@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MenuComponent } from './menu.component';
+import { TournoiComponent } from '../tournoi/tournoi.component';
 const routes: Routes = [
   {
     path: '',
@@ -21,10 +22,15 @@ const routes: Routes = [
       {
         path: 'competitions',
         loadChildren: 'app/competitions/competition.module#CompetitionModule'
+      },
+      {
+        path: 'tournois',
+        loadChildren: 'app/tournoi/tournoi.module#TournoiModule'
       }
     ]
   }
 ];
+
 
 @NgModule({
   imports: [
@@ -34,3 +40,5 @@ const routes: Routes = [
 })
 export class MenuRoutingModule {
 }
+
+

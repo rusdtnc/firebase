@@ -1,133 +1,152 @@
-<div class="col-lg-10 offset-lg-1">
-  <div class="card border-primary mb-4">
-    <div class="card-header">
-      <h5>Mon Profil TCG</h5>
-    </div>
+<div class="container-fluid app-container">
+  <div class="container">
+    <div class="card border-primary mb-4">
+      <div class="card-header">
+        <h5 class="text-primary"><i class="fas fa-user"></i> Mon Profil TCG</h5>
+      </div>
 
-    <div class="card-body row">
-      <div class="col-lg-2 row align-items-center offset-lg-1">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/mon-espace-tcg.appspot.com/o/site%2Fmen.png?alt=media&token=672e3a44-35ba-4616-974c-bd1c1decd50a"
-          class="border border-primary rounded-circle" style="width: 100px; height: 100px">
-      </div>
-      <div class="col-lg-2">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item borderless"><b>{{_joueur?.licencie?.nom}}</b></li>
-          <li class="list-group-item text-center borderless">{{_joueur?.licencie?.prenom}}</li>
-          <li class="list-group-item text-center borderless">{{_joueur?.licencie?.classement?.libelle}}</li>
-        </ul>
-      </div>
-      <div class="col-lg-7">
-        <ngx-charts-pie-grid
-          class="chart-container"
-          [scheme]="scheme"
-          [results]="_joueur?.victoiresDefaites"
-          [animations]="true"
-          [tooltipDisabled]="true">
-        </ngx-charts-pie-grid>
-      </div>
-    </div>
-  </div>
-  <div class="card border-primary mb-4">
-  <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-palmares-tab" data-toggle="tab" href="#nav-palmares" role="tab" aria-controls="nav-palmares" aria-selected="true"><h6>Palmarès</h6></a>
-      <a class="nav-item nav-link" id="nav-statistiques-tab" data-toggle="tab" href="#nav-statistiques" role="tab" aria-controls="nav-statistiques" aria-selected="true"><h6>Statistiques</h6></a>
-      <a class="nav-item nav-link" id="nav-reservations-tab" data-toggle="tab" href="#nav-reservations" role="tab" aria-controls="nav-reservations" aria-selected="false"><h6>Réservations <span *ngIf="nbReservations" class="badge badge-secondary">{{nbReservations}}</span></h6></a>
-      <a class="nav-item nav-link" id="nav-convocations-tab" data-toggle="tab" href="#nav-convocations" role="tab" aria-controls="nav-convocations" aria-selected="false"><h6>Convocations</h6></a>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-palmares" role="tabpanel" aria-labelledby="nav-palmares-tab">
-      <div class="card" style="border: none;">
-        <div class="card-body">
-          <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Adversaire</th>
-              <th scope="col">Classement</th>
-              <th scope="col">Score</th>
-              <th scope="col">Date</th>
-              <th scope="col">Compétition</th>
-            </tr>
-            </thead>
-            <tbody>
-            <ng-container *ngFor="let ligne of _joueur?.palmares">
-              <tr>
-                <th scope="row" [ngClass]="{'victoire': ligne.resultat === 'V', 'defaite': ligne.resultat === 'D'}">{{ligne.resultat}}</th>
-                <td>{{ligne.adversaire}}</td>
-                <td>{{ligne.classement}}</td>
-                <td>{{ligne.score}}</td>
-                <td>{{ligne.date}}</td>
-                <td>{{ligne.competition}}</td>
-              </tr>
-            </ng-container>
-            </tbody>
-          </table>
+      <div class="card-body row">
+        <div class="col-sm-2 row align-items-center offset-sm-1 d-sm-block d-none">
+          <img
+            src="https://firebasestorage.googleapis.com/v0/b/mon-espace-tcg.appspot.com/o/site%2Fmen.png?alt=media&token=672e3a44-35ba-4616-974c-bd1c1decd50a"
+            class="border border-primary rounded-circle" style="width: 100px; height: 100px">
         </div>
+        <div class="col-sm-2 d-flex flex-column align-items-center justify-content-center">
+          <span><b>{{joueur?.licencie?.nom}}</b></span>
+          <span>{{joueur?.licencie?.prenom}}</span>
+           {{joueur?.licencie?.classement?.libelle}}
         </div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="nav-statistiques" role="tabpanel" aria-labelledby="nav-statistiques-tab">
-      <div class="card" style="border: none;">
-        <div class="card-body">
-          <div class="pie-chart-parent">
-
-          <ngx-charts-bar-horizontal-2d
+        <div class="col-sm-7">
+          <ngx-charts-pie-grid
+            class="chart-container"
             [scheme]="scheme"
-            [schemeType]="'ordinal'"
-            [results]="_joueur?.stats"
+            [results]="joueur?.victoiresDefaites"
             [animations]="true"
-            [gradient]="false"
-            [tooltipDisabled]="false"
-            [xAxis]="true"
-            [yAxis]="true"
-            [legend]="true"
-            [legendTitle]="''"
-            [legendPosition]="legendPosition"
-            (legendLabelClick)="onLegendLabelClick($event)"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [showGridLines]="showGridLines"
-            [barPadding]="barPadding"
-            [groupPadding]="groupPadding"
-            [roundDomains]="roundDomains"
-            [roundEdges]="roundEdges"
-            [xScaleMax]="xScaleMax"
-            [showDataLabel]="showDataLabel"
-            [xAxisTickFormatting]="formatX"
-            (select)="select($event)">
-          </ngx-charts-bar-horizontal-2d>
+            [tooltipDisabled]="true">
+          </ngx-charts-pie-grid>
+        </div>
+      </div>
+    </div>
+    <div class="card border-primary mb-4">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-palmares-tab" data-toggle="tab" href="#nav-palmares" role="tab"
+             aria-controls="nav-palmares" aria-selected="true">
+            <h6 class="d-none d-sm-block"><i class="fas fa-trophy"></i> Palmarès</h6>
+            <h6 class="d-block d-sm-none"><i class="fas fa-trophy"></i></h6>
+          </a>
+          <a class="nav-item nav-link" id="nav-statistiques-tab" data-toggle="tab" href="#nav-statistiques" role="tab"
+             aria-controls="nav-statistiques" aria-selected="true">
+            <h6 class="d-none d-sm-block"><i class="fas fa-chart-line"></i> Statistiques</h6>
+            <h6 class="d-block d-sm-none"><i class="fas fa-chart-line"></i></h6>
+          </a>
+          <a class="nav-item nav-link" id="nav-reservations-tab" data-toggle="tab" href="#nav-reservations" role="tab"
+             aria-controls="nav-reservations" aria-selected="false">
+            <h6  class="d-none d-sm-block"><i class="fas fa-edit"></i> Réservations <span
+            *ngIf="nbReservations" class="badge badge-secondary">{{nbReservations}}</span></h6>
+            <h6  class="d-block d-sm-none"><i class="fas fa-edit"></i></h6>
+          </a>
+          <a class="nav-item nav-link" id="nav-convocations-tab" data-toggle="tab" href="#nav-convocations" role="tab"
+             aria-controls="nav-convocations" aria-selected="false">
+            <h6  class="d-none d-sm-block"><i class="far fa-calendar-alt"></i> Convocations</h6>
+            <h6  class="d-block d-sm-none"><i class="far fa-calendar-alt"></i></h6>
+          </a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-palmares" role="tabpanel" aria-labelledby="nav-palmares-tab">
+          <div class="card" style="border: none;">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Adversaire</th>
+                    <th scope="col">Classement</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Compétition</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <ng-container *ngFor="let ligne of joueur?.palmares">
+                    <tr>
+                      <th scope="row"
+                          [ngClass]="{'victoire': ligne.resultat === 'V', 'defaite': ligne.resultat === 'D'}">
+                        {{ligne.resultat}}
+                      </th>
+                      <td>{{ligne.adversaire}}</td>
+                      <td>{{ligne.classement}}</td>
+                      <td>{{ligne.score}}</td>
+                      <td>{{ligne.date}}</td>
+                      <td>{{ligne.competition}}</td>
+                    </tr>
+                  </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-statistiques" role="tabpanel" aria-labelledby="nav-statistiques-tab">
+          <div class="card" style="border: none;">
+            <div class="card-body">
+              <div class="pie-chart-parent">
+
+                <ngx-charts-bar-horizontal-2d
+                  [scheme]="scheme"
+                  [schemeType]="'ordinal'"
+                  [results]="joueur?.stats"
+                  [animations]="true"
+                  [gradient]="false"
+                  [tooltipDisabled]="false"
+                  [xAxis]="true"
+                  [yAxis]="true"
+                  [legend]="false"
+                  [legendTitle]="''"
+                  [legendPosition]="legendPosition"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="yAxisLabel"
+                  [showGridLines]="showGridLines"
+                  [barPadding]="barPadding"
+                  [groupPadding]="groupPadding"
+                  [roundDomains]="roundDomains"
+                  [roundEdges]="roundEdges"
+                  [xScaleMax]="xScaleMax"
+                  [showDataLabel]="showDataLabel"
+                  [xAxisTickFormatting]="formatX">
+                </ngx-charts-bar-horizontal-2d>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-reservations" role="tabpanel" aria-labelledby="nav-reservations-tab">
+          <div class="card" style="border: none;">
+            <div class="card-body">
+              <div>
+
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let reservation of reservationsJoueur">
+                    {{formatReservation(reservation)}}
+                    <button (click)="deleteReservation(reservation)" type="button" class="close" aria-label="Supprimer">
+                      <span aria-hidden="true"><i class="far fa-trash-alt"></i></span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-convocations" role="tabpanel" aria-labelledby="nav-convocations-tab">
+          <div class="card-body">
+            Convocations
           </div>
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="nav-reservations" role="tabpanel" aria-labelledby="nav-reservations-tab">
-      <div class="card" style="border: none;">
-        <div class="card-body">
-          <div>
 
-            <ul class="list-group">
-              <li class="list-group-item"*ngFor="let reservation of reservationsJoueur">{{formatReservation(reservation)}}      <button (click)="deleteReservation(reservation)" type="button" class="close" aria-label="Supprimer">
-                <span aria-hidden="true"><i class="far fa-trash-alt"></i></span>
-              </button></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="nav-convocations" role="tabpanel" aria-labelledby="nav-convocations-tab"> <div class="card-body">
-      Convocations
-    </div>
-    </div>
   </div>
-  </div>
-
-
-
-
 </div>

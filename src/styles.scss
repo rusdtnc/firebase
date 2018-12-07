@@ -1,10 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "assets/color";
 
-$primary: #00503c;
-$secondary: #c85a19;
-
-$input-btn-focus-color:       rgba($secondary, .05);
+$input-btn-focus-color: rgba($secondary, .05);
 
 @import '~bootstrap/scss/bootstrap';
 
@@ -12,15 +10,41 @@ input:not([type=file]).ng-touched.invalid, input:not([type=file]).ng-touched.ng-
   border-left: 5px solid $danger;
 }
 
-
-
-body {
-  background: transparent;
+html {
   height: 100%;
 }
 
-html {
-  height: 100%;
+body {
+  font-size: 16px;
+}
+
+.app-container {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.container {
+  padding-top: 15px;
+}
+
+@media (max-width: 767.98px) {
+  .app-container {
+    padding: 5px;
+  }
+
+  .container {
+    padding: 5px;
+  }
+
+  .card-body {
+    padding: 5px 1px;
+  }
+}
+
+
+.tab-content {
+  position: relative;
+  overflow: hidden;
 }
 
 

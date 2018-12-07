@@ -1,3 +1,5 @@
+@import '../../assets/color.scss';
+
 li.borderless { border: 0 none; }
 
 
@@ -9,9 +11,17 @@ li.borderless { border: 0 none; }
 .pie-chart-parent { display: grid; }
 
 .victoire{
-  color: #327262;
+  color: $primary;
 }
 
 .defaite{
-  color: #d37a46;
+  color: $secondary;
 }
+
+td {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

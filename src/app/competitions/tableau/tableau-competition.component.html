@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="viewBox">
+  <g transform="translate(0,0)">
+    <ng-container *ngFor="let rect of rectangles">
+      <rect  rx="10" ry="10" style="stroke-width:1;stroke:black;" [attr.x]="rect.x" [attr.y]="rect.y" [attr.width]="wRectangle" [attr.height]="hRectangle" [attr.fill]="rect.fill"></rect>
+    </ng-container>
+
+    <ng-container *ngFor="let ligne of lignes">
+      <line  style="stroke:black;stroke-width:1" [attr.x1]="ligne.x1" [attr.x2]="ligne.x2" [attr.y1]="ligne.y1" [attr.y2]="ligne.y2" ></line>
+    </ng-container>
+
+    <ng-container *ngFor="let equipe of equipes">
+      <text  (click)="detailEquipe(equipe.idEquipe)" [attr.fill]="equipe.fill" [ngStyle]="{'font-size':equipe.size, 'font-weight':equipe.weight, cursor: 'pointer'}" [attr.x]="equipe.x" [attr.y]="equipe.y" >{{equipe.value}}</text>
+    </ng-container>
+
+    <ng-container *ngFor="let text of textes">
+      <text  [attr.fill]="text.fill" [ngStyle]="{'font-size':text.size, 'font-weight':text.weight}" [attr.x]="text.x" [attr.y]="text.y" >{{text.value}}</text>
+    </ng-container>
+
+  </g>
+</svg>

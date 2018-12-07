@@ -36,7 +36,6 @@ export class JoueurService {
   constructor(private db: AngularFireDatabase,
               private modelFactory: ModelFactory<Joueur>,
               private _snackbarService: SnackbarService,
-              private httpClient: HttpClient,
               private jourBouchonService : JoueurBouchonService
   ) {
     this.joueurConnecte = this.modelFactory.create(initialState);
@@ -53,14 +52,12 @@ export class JoueurService {
         map(
           changes => {
             const joueurConnecte = this.joueurConnecte.get();
-            const infos = changes[0].payload.val() as JoueurInfos;
             joueurConnecte.key = changes[0].payload.key;
 
             localStorage.setItem('application:user',joueurConnecte.key);
 
             this.jourBouchonService.getInfosJoueur().subscribe(
               val => {
-                console.log(val);
                 joueurConnecte.value = val;
                 joueurConnecte.value.victoiresDefaites = [new Single('Victoires',val.nbVictoires), new Single('Défaites',val.nbDefaites)];
                 joueurConnecte.value.stats = val.stats.sort((stat1, stat2) => stat2.echelon - stat1.echelon).map(stat => new Multi(stat.libelle, [new Single('Victoires',stat.victoires), new Single('Défaites',stat.defaites)]))
@@ -79,6 +76,7 @@ export class JoueurService {
     )
   }
 
+  // TODO : Update numero de licence
   updateJoueur(data) {
     let joueurConnecte = this.joueurConnecte.get();
     joueurConnecte.value = Object.assign(joueurConnecte.value,data);

@@ -7,6 +7,9 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SnackbarService } from './snackbar/snackbar.service';
 import { ErrorMessageComponent } from './error-messagae/error-message.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CollapseDirective } from './directive/collapse.directive';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { FormeComponent } from './forme/forme.component';
 const ANGULAR_MODULES: any[] = [
   FormsModule, ReactiveFormsModule
 ];
@@ -20,13 +23,19 @@ const ANGULAR_MODULES: any[] = [
   ],
   declarations: [
     SnackbarComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    CollapseDirective,
+    SpinnerComponent,
+    FormeComponent
   ],
   exports: [
     CommonModule,
     SnackbarComponent,
     ErrorMessageComponent,
-    ANGULAR_MODULES
+    ANGULAR_MODULES,
+    CollapseDirective,
+    SpinnerComponent,
+    FormeComponent
   ]
 })
 export class SharedModule {

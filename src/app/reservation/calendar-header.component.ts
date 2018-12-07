@@ -117,7 +117,6 @@ export class CalendarHeaderComponent implements  OnInit, OnChanges {
       orientation: "bottom left",
       todayHighlight: true
     }).on('changeDate', function(event) {
-      console.log('changeDat');
       self.viewChange.emit('day');
       self.viewDateChange.emit(event.date);
     });

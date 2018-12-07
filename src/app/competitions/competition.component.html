@@ -1,3 +1,129 @@
-Competition component Rock
+<div class="container-fluid app-container pr-0">
+  <div class="container">
 
-{{result}}
+    <div id="accordion">
+      <div class="card border-0" style="background-color: rgba(255, 255, 255, 0)">
+        <div class="card-header border-0 head-title">
+          <h3 class="mb-0" style="color: white">
+            <i class="fas fa-minus-square" id="headingMasculine" data-toggle="collapse" data-target="#collapseMasculine"
+               aria-expanded="true" aria-controls="collapseMasculine" style="cursor: pointer" collapse></i> Equipes
+            masculines
+          </h3>
+        </div>
+        <div id="collapseMasculine" class="collapse show" aria-labelledby="headingMasculine" data-parent="#accordion"
+             style="background-color: rgba(255, 255, 255, 0)">
+          <div class="card-body row col-lg-11 offset-lg-1">
+            <ng-container *ngFor="let equipeEngagee of (_competitionService.equipesMasculines$ | async)">
+              <div class="card border-primary mb-3 mr-4" style="width: 18rem;">
+                <img class="card-img-top" src="../../assets/img/compet-h-min.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{equipeEngagee.equipe}}</h5>
+                  <p class="card-text">{{equipeEngagee.libelle}} <br> {{equipeEngagee.division}} <br>
+                    <app-forme [resultats]="equipeEngagee.forme"></app-forme>
+                  </p>
+                  <div class="node-readmore">
+                    <a  [routerLink]="['/competitions/'+equipeEngagee.idEquipe]" class="btn btn-primary">Résultats</a>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+        </div>
+      </div>
+      <div class="card border-0" style="background-color: rgba(255, 255, 255, 0)">
+        <div class="card-header border-0 head-title">
+          <h3 class="mb-0" style="color: white">
+            <i class="fas fa-minus-square" id="headingFeminine" data-toggle="collapse" data-target="#collapseFeminine"
+               aria-expanded="true" aria-controls="collapseFeminine" style="cursor: pointer" collapse></i> Equipes
+            féminines
+          </h3>
+        </div>
+        <div id="collapseFeminine" class="collapse show" aria-labelledby="headingFeminine" data-parent="#accordion">
+          <div class="card-body row col-lg-11 offset-lg-1">
+            <ng-container *ngFor="let equipeEngagee of (_competitionService.equipesFeminines$ | async)">
+              <div class="card border-primary mb-3 mr-4" style="width: 18rem;">
+                <img class="card-img-top" src="../../assets/img/compet-f-min.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{equipeEngagee.equipe}}</h5>
+                  <p class="card-text">{{equipeEngagee.libelle}} <br> {{equipeEngagee.division}} <br>
+                    <app-forme [resultats]="equipeEngagee.forme"></app-forme>
+                  </p>
+                  <div class="node-readmore">
+                    <a  [routerLink]="['/competitions/'+equipeEngagee.idEquipe]" class="btn btn-primary">Résultats</a>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="card border-0" style="background-color: rgba(255, 255, 255, 0)">
+        <div class="card-header border-0 head-title">
+          <h3 class="mb-0" style="color: white">
+            <i class="fas fa-minus-square" data-toggle="collapse" data-target="#collapseMasculinePlus"
+               aria-expanded="true" aria-controls="collapseMasculinePlus" style="cursor: pointer" collapse></i> Equipes
+            masculines 35+
+          </h3>
+        </div>
+        <div id="collapseMasculinePlus" class="collapse show" aria-labelledby="headingMasculinePlus"
+             data-parent="#accordion"
+             style="background-color: rgba(255, 255, 255, 0)">
+          <div class="card-body row col-lg-11 offset-lg-1">
+            <ng-container *ngFor="let equipeEngagee of (_competitionService.equipesMasculinesPlus$ | async)">
+              <div class="card border-primary mb-3 mr-4" style="width: 18rem;">
+                <img class="card-img-top" src="../../assets/img/compet-h-min.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{equipeEngagee.equipe}}</h5>
+                  <p class="card-text">{{equipeEngagee.libelle}} <br> {{equipeEngagee.division}} <br>
+                    <app-forme [resultats]="equipeEngagee.forme"></app-forme>
+                  </p>
+                  <div class="node-readmore">
+                    <a  [routerLink]="['/competitions/'+equipeEngagee.idEquipe]" class="btn btn-primary">Résultats</a>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+        </div>
+      </div>
+      <div class="card border-0" style="background-color: rgba(255, 255, 255, 0)">
+        <div class="card-header border-0 head-title">
+          <h3 class="mb-0" style="color: white">
+            <i class="fas fa-minus-square" id="headingFemininePlus" data-toggle="collapse"
+               data-target="#collapseFemininePlus"
+               aria-expanded="true" aria-controls="collapseFeminine" style="cursor: pointer" collapse></i> Equipes
+            féminines 35+
+          </h3>
+        </div>
+        <div id="collapseFemininePlus" class="collapse show" aria-labelledby="headingFemininePlus"
+             data-parent="#accordion">
+          <div class="card-body row col-lg-11 offset-lg-1">
+            <ng-container *ngFor="let equipeEngagee of (_competitionService.equipesFemininesPlus$ | async)">
+              <div class="card border-primary mb-4" style="width: 18rem;">
+                <img class="card-img-top" src="../../assets/img/compet-f-min.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{equipeEngagee.equipe}}</h5>
+                  <p class="card-text">{{equipeEngagee.libelle}} <br> {{equipeEngagee.division}} <br>
+                    <app-forme [resultats]="equipeEngagee.forme"></app-forme>
+                  </p>
+                  <div class="node-readmore">
+                    <a  [routerLink]="['/competitions/'+equipeEngagee.idEquipe]" class="btn btn-primary">Résultats</a>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

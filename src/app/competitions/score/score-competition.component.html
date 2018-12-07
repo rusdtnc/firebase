@@ -1,0 +1,20 @@
+<div class="row">
+  <div id="equipe1" class="col-5 text-right"
+       [ngClass]="{'victoire': rencontre.resultat === 'V', 'victoireEquipe': isVictoireEquipe(rencontre), 'defaiteEquipe': isDefaiteEquipe(rencontre)}">
+    <span (click)="detailEquipe(rencontre.equipe1.idEquipe)">{{rencontre.equipe1.nomEquipe}}</span>
+  </div>
+  <div *ngIf="!rencontre.wo" class="text-center" style="width: 35px"
+       [ngClass]="{'victoireEquipe': isVictoireEquipe(rencontre), 'defaiteEquipe': isDefaiteEquipe(rencontre)}">
+    {{rencontre.resultat?rencontre.score1:'&nbsp;'}} - {{rencontre.resultat?rencontre.score2:'&nbsp;'}}
+  </div>
+  <div *ngIf="rencontre.wo" class="text-center" style="width: 35px"
+       [ngClass]="{'victoireEquipe': isVictoireEquipe(rencontre), 'defaiteEquipe': isDefaiteEquipe(rencontre)}">
+    wo
+  </div>
+  <div id="equipe2" class="text-left col-5"
+       [ngClass]="{'victoire': rencontre.resultat === 'D', 'victoireEquipe': isVictoireEquipe(rencontre), 'defaiteEquipe': isDefaiteEquipe(rencontre)}">
+    <span (click)="detailEquipe(rencontre.equipe2.idEquipe)">{{rencontre.equipe2.nomEquipe}}</span>
+  </div>
+  <div *ngIf="getDateReelle(rencontre)" data-toggle="tooltip" data-placement="bottom" title="Reportée au {{getDateReelle(rencontre)}}" class="mytool report d-none d-sm-block">R</div>&nbsp;
+  <div *ngIf="rencontre.equipeReception !== 1" data-toggle="tooltip" data-placement="bottom" title="Récpetion {{rencontre.equipe2.nomEquipe}}" class="mytool report d-none d-sm-block">E</div>
+</div>

@@ -1,0 +1,89 @@
+<div class="container-fluid app-container">
+  <div class="container">
+
+    <app-spinner [wait]="(_competitionService.detailCompetition$ | async)?.phases"></app-spinner>
+    <div [hidden]="!(_competitionService.detailCompetition$ | async)?.phases" class="card border-primary mb-4">
+      <div class="card-header">
+        <h5 class="text-primary"><i class="fas fa-users"></i> {{(_competitionService.detailCompetition$ | async)?.competitionEquipe?.equipe}}</h5>
+      </div>
+
+      <div class="card-body row">
+        <div class="col-lg-5">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item borderless"><b>{{(_competitionService.detailCompetition$ | async)?.competitionEquipe?.libelle}}</b></li>
+            <li class="list-group-item borderless">{{(_competitionService.detailCompetition$ | async)?.competitionEquipe?.division}}</li>
+            <li class="list-group-item borderless">
+              <app-forme [resultats]="(_competitionService.detailCompetition$ | async)?.competitionEquipe?.forme"></app-forme>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-7 d-none d-sm-block">
+          <ngx-charts-pie-grid
+            class="chart-container"
+            [scheme]="scheme"
+            [results]="(_competitionService.detailCompetition$ | async)?.competitionEquipe?.victoiresDefaites"
+            [animations]="true"
+            [tooltipDisabled]="true">
+          </ngx-charts-pie-grid>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="!(_competitionService.detailCompetition$ | async)?.phases" class="card border-primary mb-4">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-rencontres-tab" data-toggle="tab" href="#nav-rencontres" role="tab"
+             aria-controls="nav-rencontres" aria-selected="true">
+            <h6 class="d-none d-sm-block"><i class="fas fa-trophy"></i> Rencontres</h6>
+            <h6 class="d-block d-sm-none"><i class="fas fa-trophy"></i></h6>
+          </a>
+          <a class="nav-item nav-link" id="nav-classement-tab" data-toggle="tab" href="#nav-classement" role="tab"
+             aria-controls="nav-classement" aria-selected="true">
+            <h6 class="d-none d-sm-block"><i class="fas fa-chart-line"></i> Classement</h6>
+            <h6 class="d-block d-sm-none"><i class="fas fa-chart-line"></i></h6>
+          </a>
+          <a *ngIf="(_competitionService.detailCompetition$ | async)?.tableau" class="nav-item nav-link" id="nav-final-tab" data-toggle="tab" href="#nav-final" role="tab"
+             aria-controls="nav-final" aria-selected="true">
+            <h6 class="d-none d-sm-block"><i class="fas fa-medal"></i> Phase Finale</h6>
+            <h6 class="d-block d-sm-none"><i class="fas fa-medal"></i></h6>
+          </a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent" *ngIf="(_competitionService.detailCompetition$ | async)?.phases">
+        <div class="tab-pane fade show active" id="nav-rencontres" role="tabpanel" aria-labelledby="nav-rencontres-tab">
+          <div class="card" style="border: none;">
+            <div class="card-body">
+              <ng-container *ngFor="let phase of (_competitionService.detailCompetition$ | async)?.phases">
+              <ng-container *ngIf="!phase.tableau">
+                <ng-container *ngFor="let journee of phase.journees">
+                <app-competition-journee [journee]="journee"></app-competition-journee>
+              </ng-container>
+              </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-classement" role="tabpanel" aria-labelledby="nav-classement-tab">
+          <div class="card" style="border: none;">
+            <div class="card-body">
+              <ng-container *ngFor="let phase of (_competitionService.detailCompetition$ | async)?.phases">
+                <app-competition-classement *ngIf="phase.classement.length > 0" [classement]="phase.classement"></app-competition-classement>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-final" role="tabpanel" aria-labelledby="nav-final-tab">
+          <div class="card" style="border: none;">
+            <div class="card-body">
+              <ng-container *ngFor="let phase of (_competitionService.detailCompetition$ | async)?.phases">
+                <app-competition-tableau *ngIf="phase.tableau" [journees]="phase.journees"></app-competition-tableau>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+    </div>
+  </div>
+</div>

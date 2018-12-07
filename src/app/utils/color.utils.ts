@@ -1,3 +1,8 @@
+export const primary = '#00503c';
+export const secondary = '#c85a19';
+
+export const bgPrimary = '#b8cec8';
+
 export class ColorUtils {
 
   public static readonly colors = {
