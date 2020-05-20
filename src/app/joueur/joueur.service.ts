@@ -1,11 +1,10 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable, of } from 'rxjs/index';
+import { Observable } from 'rxjs/index';
 import { distinctUntilChanged, map } from 'rxjs/internal/operators';
 import { JoueurInfos, LignePalmares } from './joueur';
 import { Model, ModelFactory } from 'ngx-model';
 import { SnackbarService } from '../shared/snackbar/snackbar.service';
-import { HttpClient } from '@angular/common/http';
 import { JoueurBouchonService } from './joueur.bouchoon.service';
 import { Multi, Single } from '../utils/graph';
 import * as moment from 'moment';

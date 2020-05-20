@@ -10,8 +10,7 @@ declare var $: any;
 @Component({
   selector: 'app-day',
   templateUrl: './day.component.html',
-  styleUrls: ['./day.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./day.component.scss']
 })
 export class DayComponent implements OnChanges, OnInit {
 

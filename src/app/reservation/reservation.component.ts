@@ -43,7 +43,7 @@ export class ReservationComponent implements OnInit {
               private _snackbarService: SnackbarService) {
     this.createForm();
     this._joueurService.key$.subscribe(val => this.uidJoueurConnecte = val);
-    this._joueurService.value$.subscribe(val => this.reservationForm.get('joueur').setValue(`${val.nom} ${val.prenom}`));
+    this._joueurService.value$.subscribe(val => this.reservationForm.get('joueur').setValue(`${val.licencie.nom} ${val.licencie.prenom}`));
   }
 
   createForm() {

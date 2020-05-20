@@ -1,15 +1,10 @@
 import { Multi, Single } from '../utils/graph';
 
 export class JoueurInfos {
-  constructor(public nom = '',
-              public prenom = '',
-              public licence = '',
+  constructor(public licencie = new Licencie(),
               public victoiresDefaites: Single[] = [],
-              public uidGoogle = '',
-              public nbDefaites = '',
               public stats: Multi[] = [],
-              public palmares: LignePalmares[] = []
-              ) {
+              public palmares: LignePalmares[] = []) {
   }
 }
 
@@ -19,8 +14,13 @@ export class LignePalmares {
               public classement = '',
               public date = '',
               public competition = '',
-              public score = ''
-  ) {}
+              public score = '') {
+  }
 }
 
 
+export class Licencie {
+  constructor(public nom = '',
+              public prenom = '') {
+  }
+}

@@ -43,6 +43,13 @@ export class TournoiComponent implements OnInit {
   constructor() {
   }
 
+  fill = 'red';
+
+  essai() {
+    console.log("Belep");
+    this.fill = 'green';
+  }
+
   ngOnInit() {
     this.nbEquipes = Math.pow(2, this.nbTours);
 

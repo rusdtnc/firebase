@@ -6,8 +6,7 @@ declare var $: any;
   selector: 'app-competition',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'competition.component.html',
-  styleUrls: ['./competition.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./competition.component.scss']
 })
 export class CompetitionComponent implements OnInit {
 

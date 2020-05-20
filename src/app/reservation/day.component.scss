@@ -3,9 +3,6 @@
 @mixin border($color) {
   border: solid 1px $color;
 }
-:host {
-
-}
 
 .vide {
   width: 100%;
@@ -65,33 +62,26 @@ span.reservation {
   white-space: nowrap;
 }
 
-.table td {
-  padding: 0;
-  width: 12%;
-  overflow: hidden;
-}
-
 .cal-disabled {
   background-color: #eee;
   pointer-events: none;
 }
 
-
-th.cal-time {
+.table th.cal-time {
   padding: 0;
   padding-top: 5px;
   text-align: center;
 }
 
-th.header-court {
+.table th.header-court {
   padding: 0;
   vertical-align: middle !important;
   text-align: center;
 }
 
 .table-bordered th, .table-bordered td {
-    border-bottom: thin dashed #e1e1e1;
-    border-top: none;
+  border-bottom: thin dashed #e1e1e1;
+  border-top: none;
 }
 
 thead {
@@ -115,6 +105,12 @@ a {
   color: #00503c !important;
 }
 
-.tooltip{
+.tooltip {
   font-size: 11px;
+}
+
+.table td {
+  padding: 0;
+  width: 12%;
+  overflow: hidden;
 }
