@@ -60,7 +60,7 @@ export class CompetitionService {
 
   fetchCompetitions() {
 
-    let service: Observable<any> = this.http.get("https://www.gs-tennis.com/api/equipes?codeClub=59400240&millesime=2019");
+    let service: Observable<any> = this.http.get("https://www.gs-tennis.com/api/equipes?codeClub=59400240&millesime=2022");
 
     if (this.bouchon) {
       service = this._competitionBouchonService.getCompetitions();
